@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Наши Двери — Тольятти</title>
+  <style>
+    :root{
+      --red:#c91717;
+      --red2:#e02a2a;
+      --gold:#caa64a;
+      --text:#171717;
+      --muted:#666;
+      --bg:#f7f5f2;
+      --card:#ffffff;
+      --line:rgba(0,0,0,.08);
+      --shadow:0 12px 28px rgba(0,0,0,.08);
+      --shadow-lg:0 20px 48px rgba(0,0,0,.14);
+      --container:1180px;
+      --r-xl:28px;
+      --r-lg:22px;
+      --r-md:16px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--text);background:#fff}
+    a{text-decoration:none;color:inherit}
+    img{display:block;width:100%}
+    button,input{font:inherit}
+    .hidden{display:none!important}
+    .container{width:min(var(--container),calc(100% - 28px));margin:0 auto}
+
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:14px 22px;border-radius:999px;border:2px solid transparent;font-weight:800;cursor:pointer;transition:.2s ease;text-align:center}
+    .btn:hover{transform:translateY(-1px)}
+    .btn-primary{background:linear-gradient(90deg,var(--red2),var(--red));color:#fff;box-shadow:0 8px 18px rgba(201,23,23,.18)}
+    .btn-outline{background:#fff;color:#111;border-color:var(--red)}
+    .btn-outline-light{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.28)}
+
+    .topbar{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,0,0,.06)}
+    .topbar-inner{display:grid;grid-template-columns:auto 1fr auto auto auto;gap:18px;align-items:center;padding:12px 0}
+    .brand{display:flex;align-items:center;gap:12px;min-width:0}
+    .brand-logo{width:138px;flex:0 0 138px}
+    .brand-copy{font-size:13px;line-height:1.2;font-weight:700;min-width:0}
+    .top-note{font-size:13px;line-height:1.25}
+    .top-note b{color:#2e9600}
+    .mini-bullets{font-size:13px;line-height:1.2}
+    .phone{font-size:13px;line-height:1.15;font-weight:700;text-align:right}
+    .phone strong{font-size:18px}
+
+    .hero{position:relative;overflow:hidden;color:#fff}
+    .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.62),rgba(0,0,0,.36)),url('images/fon.jpg') center/cover no-repeat;filter:blur(3px);transform:scale(1.03)}
+    .hero > .container{position:relative;z-index:1}
+    .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(330px,.82fr);gap:28px;align-items:center;padding:34px 0 42px;min-height:calc(100vh - 72px)}
+    h1{margin:0 0 14px;font-size:clamp(26px,3.9vw,50px);line-height:1.03;letter-spacing:-.02em;font-weight:900;max-width:720px}
+    .hero-sub{font-size:17px;line-height:1.45;max-width:610px;color:rgba(255,255,255,.9);margin:0 0 18px}
+    .feature-list{display:grid;gap:10px;max-width:650px;margin:0 0 22px}
+    .feature-item{display:flex;align-items:flex-start;gap:12px;font-size:16px;line-height:1.3}
+    .feature-icon{width:40px;height:40px;border-radius:50%;background:rgba(202,166,74,.18);border:2px solid var(--gold);color:var(--gold);display:flex;align-items:center;justify-content:center;flex:0 0 40px;font-weight:900}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+
+    .hero-slider{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(8px);border-radius:26px;padding:12px;box-shadow:var(--shadow-lg)}
+    .hero-main{position:relative;border-radius:20px;overflow:hidden;background:rgba(255,255,255,.08)}
+    .hero-main img{aspect-ratio:4/3;object-fit:cover}
+    .slider-arrow{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border:none;border-radius:50%;background:rgba(0,0,0,.86);color:#fff;font-size:28px;cursor:pointer;z-index:2}
+    .slider-arrow.left{left:10px}.slider-arrow.right{right:10px}
+    .thumbs{display:flex;gap:8px;overflow-x:auto;padding-top:10px}
+    .thumbs img{width:64px;height:64px;object-fit:cover;border-radius:10px;border:2px solid transparent;cursor:pointer;flex:0 0 auto;background:#fff}
+    .thumbs img.active{border-color:var(--gold)}
+
+    .section{padding:60px 0}
+    .section.alt{background:var(--bg)}
+    .section-title{margin:0 0 16px;text-align:center;font-size:clamp(26px,3vw,42px);line-height:1.08}
+
+    .catalog-controls{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:0 0 24px}
+    .catalog-btn.active{background:var(--red);border-color:var(--red);color:#fff}
+    .catalog-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+    .door-card{text-align:center}
+    .door-card img{aspect-ratio:2/4;object-fit:contain;background:transparent;padding:0}
+    .door-card-body{padding:6px 4px 0}
+    .door-card-body h3{margin:0 0 10px;font-size:17px;line-height:1.2;font-weight:800;color:#333}
+    .catalog-red-btn{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 18px;border:none;border-radius:999px;background:linear-gradient(90deg,var(--red2),var(--red));color:#fff;font-weight:800;cursor:pointer;box-shadow:0 8px 18px rgba(201,23,23,.18)}
+
+    .quiz-wrap{max-width:860px;margin:0 auto}
+    .quiz-shell{background:#f3f3f3;border-radius:26px;overflow:hidden;box-shadow:var(--shadow-lg);border:1px solid rgba(0,0,0,.05)}
+    .quiz-media{background:linear-gradient(90deg,rgba(0,0,0,.45),rgba(0,0,0,.25)),url('images/salon1.jpg') center/cover no-repeat;padding:22px}
+    .quiz-media-inner{background:rgba(255,255,255,.08);backdrop-filter:blur(3px);border-radius:20px;padding:14px}
+    .quiz-media img{aspect-ratio:16/7;object-fit:cover;border-radius:16px}
+    .quiz-panel{background:#e6e6e6;padding:16px}
+    .progress-badge{display:inline-block;padding:7px 10px;border-radius:10px;background:var(--red);color:#fff;font-size:13px;font-weight:900;margin-bottom:10px}
+    .progress-bar{height:6px;background:#e9b1b1;border-radius:999px;overflow:hidden;margin-bottom:18px}
+    .progress-fill{width:0;height:100%;background:var(--red);transition:width .25s ease}
+    .quiz-step{display:none}.quiz-step.active{display:block}
+    .quiz-title{margin:0 0 18px;text-align:center;font-size:clamp(22px,2.8vw,38px);line-height:1.1;font-weight:900}
+    .select-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:18px}
+    .select-card{background:#fff;border:3px solid transparent;border-radius:18px;overflow:hidden;cursor:pointer;position:relative;box-shadow:var(--shadow);transition:.18s ease}
+    .select-card img{aspect-ratio:4/4.2;object-fit:cover}
+    .select-card div{padding:10px;text-align:center;font-weight:800;font-size:17px}
+    .select-card.selected{border-color:var(--red);transform:scale(.99)}
+    .select-card.selected::after{content:"✓";position:absolute;right:10px;top:10px;width:42px;height:42px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:28px}
+    .option-grid{display:grid;gap:10px;margin-bottom:18px}
+    .option{display:flex;align-items:center;gap:12px;padding:13px 15px;border-radius:15px;background:rgba(255,255,255,.8);border:1px solid rgba(0,0,0,.06);cursor:pointer;user-select:none;font-size:15px;transition:.18s ease}
+    .option.selected{transform:scale(.99)}
+    .radio{width:20px;height:20px;border-radius:50%;border:3px solid #b3b3b3;background:#fff;flex:0 0 20px}
+    .option.selected .radio{border-color:#000;background:#000;box-shadow:inset 0 0 0 4px #fff}
+    .quiz-nav{display:grid;grid-template-columns:56px 1fr;gap:12px;align-items:center}
+    .quiz-nav.one-btn{grid-template-columns:56px;justify-content:start}
+    .back-btn{width:56px;height:56px;border:none;border-radius:50%;background:#cfcfcf;font-size:28px;cursor:pointer}
+    .quiz-form{display:grid;gap:14px;max-width:620px;margin:0 auto 18px}
+    .field label{display:block;margin-bottom:7px;font-size:15px;font-weight:700}
+    .field input{width:100%;min-height:52px;border-radius:12px;border:1px solid rgba(0,0,0,.12);background:#fff;padding:12px 14px;font-size:15px}
+    .success-box{background:rgba(255,255,255,.78);border-radius:20px;padding:16px;text-align:center;font-size:16px;line-height:1.4}
+
+    .cta-band{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0}
+    .cta-band-inner{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;font-size:17px;font-weight:800}
+
+    .reviews-slider,.salon-slider{position:relative}
+    .reviews-track,.salon-track{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    .review-card{background:#edf2ff;border-radius:18px;padding:18px;min-height:220px;box-shadow:var(--shadow)}
+    .review-card h4{margin:0 0 8px;font-size:16px}
+    .stars{color:#f3b51d;font-size:16px;margin-bottom:10px}
+    .review-card p{margin:0;color:#333;line-height:1.45;font-size:14px}
+    .section-nav{display:flex;justify-content:center;gap:10px;margin-top:18px}
+    .nav-dot{width:10px;height:10px;border-radius:50%;background:#d5d5d5;border:none;cursor:pointer}.nav-dot.active{background:var(--red)}
+
+    .map-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+    .map-card,.salon-card{background:#fff;border-radius:22px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line)}
+    .map-card iframe{width:100%;height:100%;min-height:360px;border:0}
+    .salon-main{position:relative}
+    .salon-main img{aspect-ratio:16/10;object-fit:cover}
+    .salon-thumbs{display:flex;gap:8px;padding:12px;overflow-x:auto}
+    .salon-thumbs img{width:84px;height:64px;border-radius:10px;object-fit:cover;border:2px solid transparent;cursor:pointer;flex:0 0 auto}
+    .salon-thumbs img.active{border-color:var(--red)}
+
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.68);z-index:100;padding:16px}
+    .modal.open{display:flex}
+    .modal-card{width:min(100%,480px);background:#f1f1f1;border-radius:22px;padding:24px;position:relative;box-shadow:0 18px 45px rgba(0,0,0,.28)}
+    .modal-close{position:absolute;right:14px;top:14px;width:36px;height:36px;border:none;border-radius:50%;background:#ddd;font-size:22px;cursor:pointer}
+    .modal-card h3{margin:0 0 18px;text-align:center;font-size:22px;line-height:1.25}
+    .modal-form{display:grid;gap:14px}
+
+    .footer-top{background:#fff;border-top:1px solid var(--line);padding:12px 0}
+    .footer-top-inner{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;font-size:13px}
+    .footer-logo{width:118px}
+    .footer{background:#101010;color:#fff;text-align:center;font-weight:700;padding:16px 0;font-size:14px}
+
+    @media (max-width:1100px){
+      .topbar-inner{grid-template-columns:1fr 1fr}
+      .hero-grid,.map-grid{grid-template-columns:1fr}
+      .catalog-grid,.reviews-track{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+    @media (max-width:760px){
+      .container{width:min(100% - 20px,var(--container))}
+      .topbar-inner,.select-cards,.catalog-grid,.reviews-track,.feature-list,.feature-cards,.footer-top-inner{grid-template-columns:1fr}
+      .hero-actions{display:grid;grid-template-columns:1fr}
+      .btn{width:100%}
+      .section{padding:46px 0}
+      .slider-arrow{width:40px;height:40px;font-size:24px}
+      .thumbs img{width:58px;height:58px}
+      .salon-thumbs img{width:72px;height:56px}
+      .phone{text-align:left}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <img class="brand-logo" src="images/logo" alt="Наши Двери" onerror="this.src='images/logo.png'">
+        <div class="brand-copy">Межкомнатные и входные двери<br>от производителя в Тольятти</div>
+      </div>
+      <div class="top-note"><b>✓</b> Более 8.500 дверей установлено<br><b>✓</b> Опыт работы с 2017 года</div>
+      <div class="mini-bullets">🛍️ Цены ниже на 30%<br>🚚 Доставка и установка за 1 день</div>
+      <button class="btn btn-outline" data-open-modal>Заказать звонок</button>
+      <div class="phone"><strong>8 (8482) 94-20-01</strong><br><span style="font-weight:500;">ежедневно без выходных</span></div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <h1>Межкомнатные и входные двери с установкой в Тольятти по цене от производителя. Пройдите тест и узнайте стоимость за 1 минуту</h1>
+        <p class="hero-sub">Подберём подходящие модели, покажем каталог и рассчитаем комплект под ваш запрос.</p>
+        <div class="feature-list">
+          <div class="feature-item"><span class="feature-icon">₽</span><span>Цены дешевле на 30% от производителя</span></div>
+          <div class="feature-item"><span class="feature-icon">⌂</span><span>Каталог дверей в наличии и под заказ</span></div>
+          <div class="feature-item"><span class="feature-icon">🚚</span><span>Доставка и установка за 1 день</span></div>
+        </div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#quiz">Узнать стоимость</a>
+          <button class="btn btn-outline-light" data-open-modal>Заказать звонок</button>
+        </div>
+      </div>
+
+      <div class="hero-side">
+        <div class="hero-slider">
+          <div class="hero-main">
+            <button class="slider-arrow left" type="button" id="heroPrev">‹</button>
+            <img id="heroMainImage" src="images/D1 Эшвайт.png" alt="Дверь">
+            <button class="slider-arrow right" type="button" id="heroNext">›</button>
+          </div>
+          <div class="thumbs" id="heroThumbs">
+            <img src="images/D1 Эшвайт.png" alt="1" class="active">
+            <img src="images/D13 Дуб белёный.png" alt="2">
+            <img src="images/Корсика.jpeg" alt="3">
+            <img src="images/ЛИРА ДГ.jpg" alt="4">
+            <img src="images/Флоренция.webp" alt="5">
+            <img src="images/Royal 2.png" alt="6">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="catalog">
+    <div class="container">
+      <h2 class="section-title">Каталог дверей</h2>
+      <div class="catalog-controls">
+        <button class="btn btn-outline catalog-btn active" data-filter="interior">Межкомнатные</button>
+        <button class="btn btn-outline catalog-btn" data-filter="entry">Входные</button>
+      </div>
+      <div class="catalog-grid" id="catalogGrid">
+        <article class="door-card" data-type="interior"><img src="images/Арабика.webp" alt="Арабика"><div class="door-card-body"><h3>Арабика</h3><button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button></div></article>
+        <article class="door-card" data-type="interior"><img src="images/Бора.webp" alt="Бора"><div class="door-card-body"><h3>Бора</h3><button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button></div></article>
+        <article class="door-card" data-type="interior"><img src="images/Корсика Зеркало.png" alt="Корсика Зеркало"><div class="door-card-body"><h3>Корсика Зеркало</h3><button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button></div></article>
+        <article class="door-card" data-type="interior"><img src="images/Корсика.jpeg" alt="Корсика"><div class="door-card-body"><h3>Корсика</h3><button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button></div></article>
+        <article class="door-card" data-type="interior"><img src="images/Лига 70.jpeg" alt="Лига 70"><div class="door-card-body"><h3>Лига 70</h3><button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button></div></article>
+        <article class="door-card" data-type="interior"><img src="images/ЛИРА ДГ.jpg" alt="Лира белая"><div class="door-card-body"><h3>Лира белая</h3><button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button></div></article>
+        <article class="door-card" data-type="interior"><img src="images/Флоренция.webp" alt="Флоренция"><div class="door-card-body"><h3>Флоренция</h3><button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button></div></article>
+
+        <article class="door-card" data-type="entry"><img src="images/Термо Белый Матовый.webp" alt="Термо Белый Матовый"><div class="door-card-body"><h3>Термо Белый Матовый</h3><button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button></div></article>
+        <article class="door-card" data-type="entry"><img src="images/D1 Эшвайт.png" alt="D1 Эшвайт"><div class="door-card-body"><h3>D1 Эшвайт</h3><button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button></div></article>
+        <article class="door-card" data-type="entry"><img src="images/D13 Дуб белёный.png" alt="D13 Дуб белёный"><div class="door-card-body"><h3>D13 Дуб белёный</h3><button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button></div></article>
+        <article class="door-card" data-type="entry"><img src="images/D28 Бетон снежный (1).png" alt="D28 Бетон снежный"><div class="door-card-body"><h3>D28 Бетон снежный</h3><button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button></div></article>
+        <article class="door-card" data-type="entry"><img src="images/D31 Ясень ривьера айс.png" alt="D31 Ясень ривьера айс"><div class="door-card-body"><h3>D31 Ясень ривьера айс</h3><button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button></div></article>
+        <article class="door-card" data-type="entry"><img src="images/Royal 2.png" alt="Royal 2"><div class="door-card-body"><h3>Royal 2</h3><button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="container cta-band-inner">
+      <span>Оставьте заявку на расчёт стоимости дверей</span>
+      <button class="btn btn-primary" data-scroll="#quiz">Узнать стоимость</button>
+    </div>
+  </section>
+
+  <section class="section alt" id="quiz">
+    <div class="container quiz-wrap">
+      <h2 class="section-title">Подберите дверь за 1 минуту</h2>
+      <div class="quiz-shell">
+        <div class="quiz-media">
+          <div class="quiz-media-inner">
+            <img id="quizHeroImage" src="images/D1 Эшвайт.png" alt="Двери">
+          </div>
+        </div>
+        <div class="quiz-panel">
+          <div class="progress-badge" id="progressBadge">0%</div>
+          <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+          <div class="quiz-step active" data-step="0">
+            <div class="quiz-title">Какие двери вас интересуют?</div>
+            <div class="select-cards">
+              <div class="select-card" data-name="doorType" data-value="Межкомнатные"><img src="images/ЛИРА ДГ.jpg" alt="Межкомнатные"><div>Межкомнатные</div></div>
+              <div class="select-card" data-name="doorType" data-value="Входные"><img src="images/D1 Эшвайт.png" alt="Входные"><div>Входные</div></div>
+            </div>
+            <div class="quiz-nav one-btn"><button class="back-btn" type="button" disabled style="opacity:.45;cursor:default;">←</button></div>
+          </div>
+
+          <div class="quiz-step" data-step="1">
+            <div class="quiz-title">Какой сегмент вас интересует?</div>
+            <div class="option-grid">
+              <label class="option" data-name="segment" data-value="Эконом"><span class="radio"></span><span>Эконом</span></label>
+              <label class="option" data-name="segment" data-value="Стандарт"><span class="radio"></span><span>Стандарт</span></label>
+              <label class="option" data-name="segment" data-value="Премиум"><span class="radio"></span><span>Премиум</span></label>
+            </div>
+            <div class="quiz-nav one-btn"><button class="back-btn" type="button" data-prev>←</button></div>
+          </div>
+
+          <div class="quiz-step" data-step="2">
+            <div class="quiz-title">Сколько дверей вам нужно?</div>
+            <div class="option-grid">
+              <label class="option" data-name="count" data-value="1"><span class="radio"></span><span>1 шт</span></label>
+              <label class="option" data-name="count" data-value="2"><span class="radio"></span><span>2 шт</span></label>
+              <label class="option" data-name="count" data-value="3"><span class="radio"></span><span>3 шт</span></label>
+              <label class="option" data-name="count" data-value="4+"><span class="radio"></span><span>Более 4 шт</span></label>
+            </div>
+            <div class="quiz-nav one-btn"><button class="back-btn" type="button" data-prev>←</button></div>
+          </div>
+
+          <div class="quiz-step" data-step="3">
+            <div class="quiz-title">Когда планируете ставить двери?</div>
+            <div class="option-grid">
+              <label class="option" data-name="timing" data-value="В ближайшее время"><span class="radio"></span><span>В ближайшее время</span></label>
+              <label class="option" data-name="timing" data-value="В течение месяца"><span class="radio"></span><span>В течение месяца</span></label>
+              <label class="option" data-name="timing" data-value="Позже"><span class="radio"></span><span>Через несколько месяцев</span></label>
+            </div>
+            <div class="quiz-nav one-btn"><button class="back-btn" type="button" data-prev>←</button></div>
+          </div>
+
+          <div class="quiz-step" data-step="4">
+            <div class="quiz-title">Как с вами удобнее связаться?</div>
+            <div class="option-grid">
+              <label class="option" data-name="contactWay" data-value="WhatsApp"><span class="radio"></span><span>WhatsApp</span></label>
+              <label class="option" data-name="contactWay" data-value="Telegram"><span class="radio"></span><span>Telegram</span></label>
+              <label class="option" data-name="contactWay" data-value="По телефону"><span class="radio"></span><span>На мобильный</span></label>
+            </div>
+            <div class="quiz-nav one-btn"><button class="back-btn" type="button" data-prev>←</button></div>
+          </div>
+
+          <div class="quiz-step" data-step="5">
+            <div class="quiz-title">Оставьте контакты для расчета стоимости</div>
+            <form class="quiz-form" id="quizForm">
+              <div class="field"><label for="quizName">Ваше имя *</label><input id="quizName" name="name" type="text" required></div>
+              <div class="field"><label for="quizPhone">Ваш телефон *</label><input id="quizPhone" name="phone" type="tel" required></div>
+              <div class="quiz-nav"><button class="back-btn" type="button" data-prev>←</button><button class="btn btn-primary" type="submit">Получить расчет</button></div>
+            </form>
+            <div class="success-box hidden" id="quizSuccess">Спасибо! Заявка отправлена.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="reviews">
+    <div class="container">
+      <h2 class="section-title">Отзывы клиентов</h2>
+      <div class="reviews-slider">
+        <div class="reviews-track" id="reviewsTrack">
+          <article class="review-card"><h4>Зульфия</h4><div class="stars">★★★★★</div><p>Осталась довольна качеством входной двери и вниманием к клиенту. Быстро ответили на вопросы, помогли с выбором, доставку выполнили вовремя.</p></article>
+          <article class="review-card"><h4>Покупатель из Тольятти</h4><div class="stars">★★★★★</div><p>Покупали межкомнатные двери. Качество понравилось, модель подошла хорошо, всё выглядело аккуратно и консультирование было понятным.</p></article>
+          <article class="review-card"><h4>Клиент магазина</h4><div class="stars">★★★★★</div><p>Понравился выбор и спокойная консультация. Помогли подобрать вариант по бюджету, объяснили разницу между моделями и сроками.</p></article>
+        </div>
+        <div class="section-nav" id="reviewsDots"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="salon">
+    <div class="container">
+      <h2 class="section-title">Посмотрите двери в нашем магазине</h2>
+      <div class="salon-slider">
+        <div class="salon-card">
+          <div class="salon-main">
+            <button class="slider-arrow left" type="button" id="salonPrev">‹</button>
+            <img id="salonMainImage" src="images/salon1.jpg" alt="Салон дверей">
+            <button class="slider-arrow right" type="button" id="salonNext">›</button>
+          </div>
+          <div class="salon-thumbs" id="salonThumbs">
+            <img src="images/salon1.jpg" class="active" alt="salon1">
+            <img src="images/salon2.jpg" alt="salon2">
+            <img src="images/salon3.jpg" alt="salon3">
+            <img src="images/salon4.jpg" alt="salon4">
+          </div>
+        </div>
+        <div class="section-nav" id="salonDots"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="address">
+    <div class="container">
+      <h2 class="section-title">Адрес нашего магазина дверей в Тольятти</h2>
+      <div class="map-grid">
+        <div class="map-card">
+          <iframe src="https://yandex.ru/map-widget/v1/?ll=49.344664%2C53.541505&z=16&pt=49.344664,53.541505,pm2rdm" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="salon-card">
+          <div class="salon-main">
+            <button class="slider-arrow left" type="button" id="shopPrev">‹</button>
+            <img id="shopMainImage" src="images/salon1.jpg" alt="Фото магазина">
+            <button class="slider-arrow right" type="button" id="shopNext">›</button>
+          </div>
+          <div class="salon-thumbs" id="shopThumbs">
+            <img src="images/salon1.jpg" class="active" alt="shop1">
+            <img src="images/salon2.jpg" alt="shop2">
+            <img src="images/salon3.jpg" alt="shop3">
+            <img src="images/salon4.jpg" alt="shop4">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="modal" id="callbackModal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" type="button" aria-label="Закрыть">×</button>
+      <h3>Оставьте заявку на расчет стоимости дверей и мы перезвоним в течение 15 минут</h3>
+      <form class="modal-form" id="callbackForm">
+        <div class="field"><label for="callbackName">Ваше имя *</label><input id="callbackName" name="name" type="text" required></div>
+        <div class="field"><label for="callbackPhone">Ваш телефон *</label><input id="callbackPhone" name="phone" type="tel" required></div>
+        <button class="btn btn-outline" type="submit">Рассчитать стоимость</button>
+      </form>
+      <div class="success-box hidden" id="callbackSuccess">Спасибо! Заявка на обратный звонок отправлена.</div>
+    </div>
+  </div>
+
+  <div class="footer-top">
+    <div class="container footer-top-inner">
+      <img class="footer-logo" src="images/logo" alt="Наши Двери" onerror="this.src='images/logo.png'">
+      <div>Тольятти, Тополиная улица, 22а · Межкомнатные и входные двери · Ежедневно без выходных</div>
+      <div style="font-weight:800;">8 (8482) 94-20-01</div>
+    </div>
+  </div>
+  <footer class="footer">Наши Двери</footer>
+
+  <script>
+    function makeSlider(mainId, thumbsId, prevId, nextId, intervalMs = 3200) {
+      const main = document.getElementById(mainId);
+      const thumbsWrap = document.getElementById(thumbsId);
+      const thumbs = thumbsWrap ? [...thumbsWrap.querySelectorAll('img')] : [];
+      const prev = document.getElementById(prevId);
+      const next = document.getElementById(nextId);
+      let index = 0;
+      if (!main || !thumbs.length) return;
+
+      const images = thumbs.map(t => t.src);
+      function render() {
+        main.src = images[index];
+        thumbs.forEach((t, i) => t.classList.toggle('active', i === index));
+      }
+      function go(step) {
+        index = (index + step + images.length) % images.length;
+        render();
+      }
+      thumbs.forEach((thumb, i) => thumb.addEventListener('click', () => { index = i; render(); reset(); }));
+      prev && prev.addEventListener('click', () => { go(-1); reset(); });
+      next && next.addEventListener('click', () => { go(1); reset(); });
+      let timer = setInterval(() => go(1), intervalMs);
+      function reset(){ clearInterval(timer); timer = setInterval(() => go(1), intervalMs); }
+      render();
+    }
+
+    makeSlider('heroMainImage', 'heroThumbs', 'heroPrev', 'heroNext', 2600);
+    makeSlider('salonMainImage', 'salonThumbs', 'salonPrev', 'salonNext', 3000);
+    makeSlider('shopMainImage', 'shopThumbs', 'shopPrev', 'shopNext', 3000);
+
+    document.querySelectorAll('[data-scroll]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = document.querySelector(btn.dataset.scroll);
+        if (target) target.scrollIntoView({behavior:'smooth', block:'start'});
+      });
+    });
+
+    const quizState = { doorType:'', segment:'', count:'', timing:'', contactWay:'' };
+    const steps = [...document.querySelectorAll('.quiz-step')];
+    const progressBadge = document.getElementById('progressBadge');
+    const progressFill = document.getElementById('progressFill');
+    const quizHeroImage = document.getElementById('quizHeroImage');
+    const totalSteps = 6;
+    let currentStep = 0;
+
+    function updateProgress() {
+      const percent = Math.round((currentStep / (totalSteps - 1)) * 100);
+      progressBadge.textContent = percent + '%';
+      progressFill.style.width = percent + '%';
+    }
+    function showStep(index) {
+      currentStep = index;
+      steps.forEach((step, i) => step.classList.toggle('active', i === index));
+      updateProgress();
+    }
+
+    document.querySelectorAll('[data-prev]').forEach(btn => btn.addEventListener('click', () => { if (currentStep > 0) showStep(currentStep - 1); }));
+
+    document.querySelectorAll('.option').forEach(option => {
+      option.addEventListener('click', () => {
+        const name = option.dataset.name;
+        quizState[name] = option.dataset.value;
+        document.querySelectorAll('.option[data-name="' + name + '"]').forEach(el => el.classList.remove('selected'));
+        option.classList.add('selected');
+        setTimeout(() => { if (currentStep < totalSteps - 1) showStep(currentStep + 1); }, 220);
+      });
+    });
+
+    const catalogButtons = document.querySelectorAll('.catalog-btn');
+    const cards = document.querySelectorAll('.door-card');
+    function setCatalogFilter(filter) {
+      catalogButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.filter === filter));
+      cards.forEach(card => card.classList.toggle('hidden', card.dataset.type !== filter));
+    }
+    catalogButtons.forEach(btn => btn.addEventListener('click', () => setCatalogFilter(btn.dataset.filter)));
+
+    document.querySelectorAll('.select-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const value = card.dataset.value;
+        quizState.doorType = value;
+        document.querySelectorAll('.select-card').forEach(el => el.classList.remove('selected'));
+        card.classList.add('selected');
+        if (value === 'Межкомнатные') {
+          quizHeroImage.src = 'images/ЛИРА ДГ.jpg';
+          setCatalogFilter('interior');
+        } else {
+          quizHeroImage.src = 'images/D1 Эшвайт.png';
+          setCatalogFilter('entry');
+        }
+        setTimeout(() => { if (currentStep < totalSteps - 1) showStep(currentStep + 1); }, 220);
+      });
+    });
+
+    const quizForm = document.getElementById('quizForm');
+    const quizSuccess = document.getElementById('quizSuccess');
+    quizForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      quizForm.classList.add('hidden');
+      quizSuccess.classList.remove('hidden');
+    });
+
+    const modal = document.getElementById('callbackModal');
+    const callbackForm = document.getElementById('callbackForm');
+    const callbackSuccess = document.getElementById('callbackSuccess');
+    const openModalButtons = document.querySelectorAll('[data-open-modal]');
+    const closeModalButton = document.querySelector('.modal-close');
+    function openModal(){ modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); }
+    function closeModal(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); }
+    openModalButtons.forEach(btn => btn.addEventListener('click', openModal));
+    closeModalButton.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    callbackForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      callbackForm.classList.add('hidden');
+      callbackSuccess.classList.remove('hidden');
+    });
+
+    showStep(0);
+    setCatalogFilter('interior');
+  </script>
+</body>
+</html>
