@@ -292,21 +292,15 @@
     }
     .door-card{
       text-align:center;
-      display:flex;
-      flex-direction:column;
-      justify-content:flex-start;
     }
     .door-card img{
-      height:320px;
-      width:100%;
+      aspect-ratio:2/4;
       object-fit:contain;
       background:transparent;
       padding:0;
-      margin:0 auto;
     }
     .door-card-body{
       padding:8px 4px 0;
-      margin-top:2px;
     }
     .door-card-body h3{
       margin:0 0 10px;
@@ -314,10 +308,6 @@
       line-height:1.2;
       font-weight:800;
       color:#333;
-      min-height:44px;
-      display:flex;
-      align-items:flex-start;
-      justify-content:center;
     }
     .catalog-red-btn{
       display:inline-flex;
@@ -350,7 +340,7 @@
       font-weight:800;
     }
 
-    .quiz-wrap{max-width:900px;margin:0 auto}
+    .quiz-wrap{max-width:930px;margin:0 auto}
     .quiz-shell{
       background:#f3f3f3;
       border-radius:28px;
@@ -362,18 +352,18 @@
       background:
         linear-gradient(90deg, rgba(0,0,0,.40), rgba(0,0,0,.24)),
         url('images/salon1.jpg') center/cover no-repeat;
-      padding:20px;
+      padding:24px;
     }
     .quiz-media-inner{
       background:rgba(255,255,255,.08);
-      border-radius:18px;
-      padding:10px;
+      border-radius:20px;
+      padding:14px;
       backdrop-filter:blur(3px);
     }
     .quiz-media img{
-      aspect-ratio:16/6.4;
+      aspect-ratio:16/7;
       object-fit:cover;
-      border-radius:14px;
+      border-radius:16px;
     }
     .quiz-panel{
       background:#e3e3e3;
@@ -407,43 +397,35 @@
     .quiz-title{
       margin:0 0 18px;
       text-align:center;
-      font-size:clamp(24px, 2.4vw, 36px);
+      font-size:clamp(26px, 2.8vw, 42px);
       line-height:1.08;
       font-weight:900;
     }
     .select-cards{
       display:grid;
       grid-template-columns:repeat(2, minmax(0,1fr));
-      gap:12px;
+      gap:14px;
       margin-bottom:18px;
-      align-items:start;
     }
     .select-card{
       background:#fff;
       border:3px solid transparent;
-      border-radius:18px;
+      border-radius:20px;
       overflow:hidden;
       cursor:pointer;
       position:relative;
       box-shadow:var(--shadow);
       transition:.18s ease;
-      min-height:250px;
-      display:flex;
-      flex-direction:column;
-      justify-content:flex-start;
     }
     .select-card img{
-      height:180px;
-      width:100%;
+      aspect-ratio:4/4.2;
       object-fit:cover;
     }
     .select-card div{
-      padding:10px 12px 12px;
+      padding:12px;
       text-align:center;
       font-weight:800;
-      font-size:16px;
-      line-height:1.2;
-      margin-top:auto;
+      font-size:18px;
     }
     .select-card.selected{
       border-color:var(--red);
@@ -548,56 +530,46 @@
     .installed-grid{
       display:grid;
       grid-template-columns:repeat(4, minmax(0,1fr));
-      gap:14px;
+      gap:16px;
     }
     .installed-card{
-      background:#fff;
-      border-radius:16px;
-      overflow:hidden;
-      box-shadow:var(--shadow);
-      border:1px solid var(--line);
-    }
-    .installed-card img{
-      aspect-ratio:4/4.8;
-      object-fit:cover;
-    }
-
-    .reviews-wrap{
-      position:relative;
-    }
-    .reviews-row{
-      display:grid;
-      grid-template-columns:repeat(3, minmax(0,1fr));
-      gap:16px;
-      align-items:start;
-    }
-    .review-photo{
       background:#fff;
       border-radius:18px;
       overflow:hidden;
       box-shadow:var(--shadow);
       border:1px solid var(--line);
     }
-    .review-photo img{
+    .installed-card img{
       aspect-ratio:4/5;
-      object-fit:contain;
-      background:#fff;
+      object-fit:cover;
     }
-    .reviews-arrows{
-      display:flex;
-      justify-content:center;
-      gap:14px;
-      margin-top:20px;
+
+    .reviews-track{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:16px;
     }
-    .reviews-btn{
-      width:52px;
-      height:52px;
-      border:none;
-      border-radius:50%;
-      background:#111;
-      color:#fff;
-      font-size:28px;
-      cursor:pointer;
+    .review-card{
+      background:#eef2ff;
+      border-radius:18px;
+      padding:18px;
+      min-height:220px;
+      box-shadow:var(--shadow);
+    }
+    .review-card h4{
+      margin:0 0 8px;
+      font-size:16px;
+    }
+    .stars{
+      color:#f3b51d;
+      font-size:16px;
+      margin-bottom:10px;
+    }
+    .review-card p{
+      margin:0;
+      color:#333;
+      font-size:14px;
+      line-height:1.45;
     }
 
     .salon-card,
@@ -702,14 +674,22 @@
     .footer-logo{
       width:124px;
     }
+    .footer{
+      background:#101010;
+      color:#fff;
+      text-align:center;
+      font-weight:700;
+      padding:16px 0;
+      font-size:14px;
+    }
 
     @media (max-width: 1180px){
       .topbar-inner{grid-template-columns:1fr 1fr}
       .hero-grid,
       .map-grid{grid-template-columns:1fr}
       .catalog-grid{grid-template-columns:repeat(4, minmax(0,1fr))}
-      .installed-grid{grid-template-columns:repeat(4, minmax(0,1fr))}
-      .reviews-row{grid-template-columns:repeat(3, minmax(0,1fr))}
+      .installed-grid{grid-template-columns:repeat(3, minmax(0,1fr))}
+      .reviews-track{grid-template-columns:1fr 1fr}
     }
 
     @media (max-width: 760px){
@@ -718,9 +698,9 @@
       .select-cards,
       .catalog-grid,
       .installed-grid,
+      .reviews-track,
       .footer-top-inner,
-      .feature-list,
-      .reviews-row{
+      .feature-list{
         grid-template-columns:1fr;
       }
       .hero-actions{display:grid;grid-template-columns:1fr}
@@ -740,9 +720,6 @@
       .feature-item{
         font-size:13px;
         padding:14px;
-      }
-      .installed-grid{
-        grid-template-columns:repeat(2, minmax(0,1fr));
       }
     }
   </style>
@@ -824,7 +801,7 @@
         <div class="hero-slider">
           <div class="hero-main">
             <button class="slider-arrow left" type="button" id="heroPrev">‹</button>
-            <img id="heroMainImage" src="images/1.jpg" alt="Дверь">
+            <img id="heroMainImage" src="images/D1 Эшвайт.png" alt="Дверь">
             <button class="slider-arrow right" type="button" id="heroNext">›</button>
           </div>
 
@@ -836,6 +813,7 @@
             <img src="images/10.jpg" alt="5">
             <img src="images/11.jpg" alt="6">
             <img src="images/12.jpg" alt="7">
+  
           </div>
         </div>
       </div>
@@ -900,16 +878,16 @@
           </div>
         </article>
 
-        <article class="door-card" data-type="interior">
+             <article class="door-card" data-type="interior">
           <img src="images/Л7 Белый Софт.png" alt="Л7 Белый Софт">
           <div class="door-card-body">
             <h3>Л7 Белый Софт</h3>
             <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
-
-        <article class="door-card" data-type="interior">
-          <img src="images/Л7 Мокко.jpg" alt="Л7 Мокко">
+        
+     <article class="door-card" data-type="interior">
+          <img src="images/Л7 Мокко.jpg" alt="Л7 Моккоа">
           <div class="door-card-body">
             <h3>Л7 Мокко</h3>
             <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
@@ -939,19 +917,12 @@
             <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
+    
 
-        <article class="door-card" data-type="interior">
+             <article class="door-card" data-type="interior">
           <img src="images/ЛДГ Белая Лиственница.jpeg" alt="ЛДГ Белая Лиственница">
           <div class="door-card-body">
             <h3>ЛДГ Белая Лиственница</h3>
-            <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
-          </div>
-        </article>
-
-        <article class="door-card" data-type="interior">
-          <img src="images/Лига 70.jpeg" alt="Лига 70">
-          <div class="door-card-body">
-            <h3>Лига 70</h3>
             <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
@@ -972,13 +943,6 @@
           </div>
         </article>
 
-        <article class="door-card" data-type="interior">
-          <img src="images/Термо Белый Матовый.webp" alt="Термо Белый Матовый">
-          <div class="door-card-body">
-            <h3>Термо Белый Матовый</h3>
-            <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
-          </div>
-        </article>
 
         <article class="door-card" data-type="interior">
           <img src="images/Флоренция.webp" alt="Флоренция">
@@ -987,6 +951,7 @@
             <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
+
 
         <article class="door-card" data-type="interior">
           <img src="images/Л1 Белый Софт.png" alt="Л1 Белый Софт">
@@ -1004,7 +969,7 @@
           </div>
         </article>
 
-        <article class="door-card" data-type="entry">
+        <article class="door-card" data-type="interior">
           <img src="images/D1 Эшвайт.png" alt="D1 Эшвайт">
           <div class="door-card-body">
             <h3>D1 Эшвайт</h3>
@@ -1012,7 +977,7 @@
           </div>
         </article>
 
-        <article class="door-card" data-type="entry">
+        <article class="door-card" data-type="interior">
           <img src="images/D13 Дуб белёный.png" alt="D13 Дуб белёный">
           <div class="door-card-body">
             <h3>D13 Дуб белёный</h3>
@@ -1020,7 +985,7 @@
           </div>
         </article>
 
-        <article class="door-card" data-type="entry">
+        <article class="door-card" data-type="interior">
           <img src="images/D28 Бетон снежный (1).png" alt="D28 Бетон снежный">
           <div class="door-card-body">
             <h3>D28 Бетон снежный</h3>
@@ -1028,7 +993,7 @@
           </div>
         </article>
 
-        <article class="door-card" data-type="entry">
+        <article class="door-card" data-type="interior">
           <img src="images/D31 Ясень ривьера айс.png" alt="D31 Ясень ривьера айс">
           <div class="door-card-body">
             <h3>D31 Ясень ривьера айс</h3>
@@ -1036,7 +1001,7 @@
           </div>
         </article>
 
-        <article class="door-card" data-type="entry">
+        <article class="door-card" data-type="interior">
           <img src="images/Royal 2.png" alt="Royal 2">
           <div class="door-card-body">
             <h3>Royal 2</h3>
@@ -1183,13 +1148,24 @@
     <div class="container">
       <h2 class="section-title">Отзывы клиентов</h2>
 
-      <div class="reviews-wrap">
-        <div class="reviews-row" id="reviewsRow"></div>
+      <div class="reviews-track">
+        <article class="review-card">
+          <h4>Елена</h4>
+          <div class="stars">★★★★★</div>
+          <p>Подобрали двери под интерьер, всё объяснили спокойно и без навязывания. В итоге взяли вариант, который реально подошёл по бюджету.</p>
+        </article>
 
-        <div class="reviews-arrows">
-          <button class="reviews-btn" id="reviewsPrev">‹</button>
-          <button class="reviews-btn" id="reviewsNext">›</button>
-        </div>
+        <article class="review-card">
+          <h4>Анастасия</h4>
+          <div class="stars">★★★★★</div>
+          <p>Понравился выбор и то, что менеджер быстро сориентировал по моделям. Фото и живой вариант совпали, остались довольны.</p>
+        </article>
+
+        <article class="review-card">
+          <h4>Виктория</h4>
+          <div class="stars">★★★★★</div>
+          <p>Хороший магазин, всё понятно по срокам и стоимости. Помогли выбрать входную дверь и подсказали по комплектации.</p>
+        </article>
       </div>
     </div>
   </section>
@@ -1270,6 +1246,8 @@
       <div style="font-weight:800;">8 (8482) 94-20-01</div>
     </div>
   </div>
+
+  <footer class="footer">Наши Двери</footer>
 
   <script>
     function makeSlider(mainId, thumbsId, prevId, nextId, intervalMs = 3200) {
@@ -1457,6 +1435,10 @@
   </script>
 </body>
 </html>
+
+
+
+
 
 
 
