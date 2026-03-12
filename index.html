@@ -340,13 +340,30 @@
       font-weight:800;
     }
 
-    .quiz-wrap{max-width:760px;margin:0 auto}
+    .quiz-wrap{max-width:930px;margin:0 auto}
     .quiz-shell{
       background:#f3f3f3;
       border-radius:28px;
       overflow:hidden;
       box-shadow:var(--shadow-lg);
       border:1px solid rgba(0,0,0,.05);
+    }
+    .quiz-media{
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.40), rgba(0,0,0,.24)),
+        url('images/salon1.jpg') center/cover no-repeat;
+      padding:24px;
+    }
+    .quiz-media-inner{
+      background:rgba(255,255,255,.08);
+      border-radius:20px;
+      padding:14px;
+      backdrop-filter:blur(3px);
+    }
+    .quiz-media img{
+      aspect-ratio:16/7;
+      object-fit:cover;
+      border-radius:16px;
     }
     .quiz-panel{
       background:#e3e3e3;
@@ -378,10 +395,10 @@
     .quiz-step{display:none}
     .quiz-step.active{display:block}
     .quiz-title{
-      margin:0 0 16px;
+      margin:0 0 18px;
       text-align:center;
-      font-size:clamp(20px, 2vw, 30px);
-      line-height:1.1;
+      font-size:clamp(26px, 2.8vw, 42px);
+      line-height:1.08;
       font-weight:900;
     }
     .select-cards{
@@ -405,10 +422,10 @@
       object-fit:cover;
     }
     .select-card div{
-      padding:10px;
+      padding:12px;
       text-align:center;
       font-weight:800;
-      font-size:15px;
+      font-size:18px;
     }
     .select-card.selected{
       border-color:var(--red);
@@ -438,13 +455,13 @@
       display:flex;
       align-items:center;
       gap:12px;
-      padding:12px 14px;
+      padding:14px 16px;
       border-radius:16px;
       background:rgba(255,255,255,.82);
       border:1px solid rgba(0,0,0,.06);
       cursor:pointer;
       user-select:none;
-      font-size:14px;
+      font-size:16px;
       transition:.18s ease;
     }
     .option.selected{transform:scale(.99)}
@@ -513,56 +530,46 @@
     .installed-grid{
       display:grid;
       grid-template-columns:repeat(4, minmax(0,1fr));
-      gap:14px;
+      gap:16px;
     }
     .installed-card{
-      background:#fff;
-      border-radius:16px;
-      overflow:hidden;
-      box-shadow:var(--shadow);
-      border:1px solid var(--line);
-    }
-    .installed-card img{
-      aspect-ratio:4/4.8;
-      object-fit:cover;
-    }
-
-    .reviews-wrap{
-      position:relative;
-    }
-    .reviews-row{
-      display:grid;
-      grid-template-columns:repeat(3, minmax(0,1fr));
-      gap:16px;
-      align-items:start;
-    }
-    .review-photo{
       background:#fff;
       border-radius:18px;
       overflow:hidden;
       box-shadow:var(--shadow);
       border:1px solid var(--line);
     }
-    .review-photo img{
+    .installed-card img{
       aspect-ratio:4/5;
-      object-fit:contain;
-      background:#fff;
+      object-fit:cover;
     }
-    .reviews-arrows{
-      display:flex;
-      justify-content:center;
-      gap:14px;
-      margin-top:20px;
+
+    .reviews-track{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:16px;
     }
-    .reviews-btn{
-      width:52px;
-      height:52px;
-      border:none;
-      border-radius:50%;
-      background:#111;
-      color:#fff;
-      font-size:28px;
-      cursor:pointer;
+    .review-card{
+      background:#eef2ff;
+      border-radius:18px;
+      padding:18px;
+      min-height:220px;
+      box-shadow:var(--shadow);
+    }
+    .review-card h4{
+      margin:0 0 8px;
+      font-size:16px;
+    }
+    .stars{
+      color:#f3b51d;
+      font-size:16px;
+      margin-bottom:10px;
+    }
+    .review-card p{
+      margin:0;
+      color:#333;
+      font-size:14px;
+      line-height:1.45;
     }
 
     .salon-card,
@@ -577,7 +584,7 @@
       position:relative;
     }
     .salon-main img{
-      aspect-ratio:16/7;
+      aspect-ratio:16/10;
       object-fit:cover;
     }
     .salon-thumbs{
@@ -587,8 +594,8 @@
       padding:12px;
     }
     .salon-thumbs img{
-      width:68px;
-      height:52px;
+      width:84px;
+      height:64px;
       object-fit:cover;
       border-radius:10px;
       border:2px solid transparent;
@@ -667,14 +674,22 @@
     .footer-logo{
       width:124px;
     }
+    .footer{
+      background:#101010;
+      color:#fff;
+      text-align:center;
+      font-weight:700;
+      padding:16px 0;
+      font-size:14px;
+    }
 
     @media (max-width: 1180px){
       .topbar-inner{grid-template-columns:1fr 1fr}
       .hero-grid,
       .map-grid{grid-template-columns:1fr}
       .catalog-grid{grid-template-columns:repeat(4, minmax(0,1fr))}
-      .installed-grid{grid-template-columns:repeat(4, minmax(0,1fr))}
-      .reviews-row{grid-template-columns:repeat(3, minmax(0,1fr))}
+      .installed-grid{grid-template-columns:repeat(3, minmax(0,1fr))}
+      .reviews-track{grid-template-columns:1fr 1fr}
     }
 
     @media (max-width: 760px){
@@ -683,9 +698,9 @@
       .select-cards,
       .catalog-grid,
       .installed-grid,
+      .reviews-track,
       .footer-top-inner,
-      .feature-list,
-      .reviews-row{
+      .feature-list{
         grid-template-columns:1fr;
       }
       .hero-actions{display:grid;grid-template-columns:1fr}
@@ -705,9 +720,6 @@
       .feature-item{
         font-size:13px;
         padding:14px;
-      }
-      .installed-grid{
-        grid-template-columns:repeat(2, minmax(0,1fr));
       }
     }
   </style>
@@ -801,6 +813,7 @@
             <img src="images/10.jpg" alt="5">
             <img src="images/11.jpg" alt="6">
             <img src="images/12.jpg" alt="7">
+  
           </div>
         </div>
       </div>
@@ -821,7 +834,7 @@
           <img src="images/Арабика.webp" alt="Арабика">
           <div class="door-card-body">
             <h3>Арабика</h3>
-            <button class="catalog-red-btn" data-scroll="#quiz">Узнать цену</button>
+            <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
 
@@ -829,15 +842,15 @@
           <img src="images/Бора.webp" alt="Бора">
           <div class="door-card-body">
             <h3>Бора</h3>
-            <button class="catalog-red-btn" data-scroll="#quiz">Узнать цену</button>
+            <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
 
         <article class="door-card" data-type="entry">
-          <img src="images/Термо Чикаго-2 (Штамп).png" alt="Термо Чикаго-2">
+          <img src="images/Термо Чикаго-2 (Штамп).png" alt="Термо Чикаго-2 (Штамп)">
           <div class="door-card-body">
-            <h3>Термо Чикаго-2</h3>
-            <button class="catalog-red-btn" data-scroll="#quiz">Узнать цену</button>
+            <h3>Термо Чикаго-2 (Штамп)</h3>
+            <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
 
@@ -845,7 +858,7 @@
           <img src="images/Термо Чикаго 1 Окно.jpg" alt="Термо Чикаго 1 Окно">
           <div class="door-card-body">
             <h3>Термо Чикаго 1 Окно</h3>
-            <button class="catalog-red-btn" data-scroll="#quiz">Узнать цену</button>
+            <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
 
@@ -853,7 +866,7 @@
           <img src="images/Дельта 2МДФ НЕО10.webp" alt="Дельта 2МДФ">
           <div class="door-card-body">
             <h3>Дельта 2МДФ</h3>
-            <button class="catalog-red-btn" data-scroll="#quiz">Узнать цену</button>
+            <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
 
@@ -861,7 +874,7 @@
           <img src="images/Гамма 2 МДФ НЕО10 белая.jpg" alt="Гамма 2 МДФ">
           <div class="door-card-body">
             <h3>Гамма 2 МДФ</h3>
-            <button class="catalog-red-btn" data-scroll="#quiz">Узнать цену</button>
+            <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
 
@@ -869,7 +882,7 @@
           <img src="images/Корсика Зеркало.png" alt="Корсика Зеркало">
           <div class="door-card-body">
             <h3>Корсика Зеркало</h3>
-            <button class="catalog-red-btn" data-scroll="#quiz">Узнать цену</button>
+            <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
 
@@ -877,7 +890,7 @@
           <img src="images/Корсика.jpeg" alt="Корсика">
           <div class="door-card-body">
             <h3>Корсика</h3>
-            <button class="catalog-red-btn" data-scroll="#quiz">Узнать цену</button>
+            <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
 
@@ -885,7 +898,7 @@
           <img src="images/Лига 70.jpeg" alt="Лига 70">
           <div class="door-card-body">
             <h3>Лига 70</h3>
-            <button class="catalog-red-btn" data-scroll="#quiz">Узнать цену</button>
+            <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
 
@@ -977,10 +990,9 @@
           <img src="images/Термо Белый Матовый.webp" alt="Термо Белый Матовый">
           <div class="door-card-body">
             <h3>Термо Белый Матовый</h3>
-            <button class="catalog-red-btn" data-scroll="#quiz">Узнать цену</button>
+            <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
-
 
         <article class="door-card" data-type="interior">
           <img src="images/2с1м беленный дуб БС.jpg" alt="<2С1М Беленый дуб">
@@ -1038,6 +1050,12 @@
       <h2 class="section-title">Подберите дверь за 1 минуту</h2>
 
       <div class="quiz-shell">
+        <div class="quiz-media">
+          <div class="quiz-media-inner">
+            <img id="quizHeroImage" src="images/D1 Эшвайт.png" alt="Двери">
+          </div>
+        </div>
+
         <div class="quiz-panel">
           <div class="progress-badge" id="progressBadge">0%</div>
           <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
@@ -1152,7 +1170,7 @@
     </div>
   </section>
 
- <section class="section alt" id="reviews">
+  <section class="section alt" id="reviews">
     <div class="container">
       <h2 class="section-title">Отзывы клиентов</h2>
 
@@ -1443,6 +1461,10 @@
   </script>
 </body>
 </html>
+
+
+
+
 
 
 
