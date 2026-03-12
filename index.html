@@ -1255,6 +1255,8 @@
     </div>
   </div>
 
+  <footer class="footer">Наши Двери</footer>
+
   <script>
     function makeSlider(mainId, thumbsId, prevId, nextId, intervalMs = 3200) {
       const main = document.getElementById(mainId);
@@ -1327,6 +1329,7 @@
     const steps = [...document.querySelectorAll('.quiz-step')];
     const progressBadge = document.getElementById('progressBadge');
     const progressFill = document.getElementById('progressFill');
+    const quizHeroImage = document.getElementById('quizHeroImage');
     const totalSteps = 6;
     let currentStep = 0;
 
@@ -1384,6 +1387,14 @@
         document.querySelectorAll('.select-card').forEach(el => el.classList.remove('selected'));
         card.classList.add('selected');
 
+        if (value === 'Межкомнатные') {
+          quizHeroImage.src = 'images/ЛИРА ДГ.jpg';
+          setCatalogFilter('interior');
+        } else {
+          quizHeroImage.src = 'images/D1 Эшвайт.png';
+          setCatalogFilter('entry');
+        }
+
         setTimeout(() => {
           if (currentStep < totalSteps - 1) showStep(currentStep + 1);
         }, 220);
@@ -1427,49 +1438,22 @@
       callbackSuccess.classList.remove('hidden');
     });
 
-    const reviewImages = [
-      'images/ot1.PNG',
-      'images/ot2.png',
-      'images/ot3.png',
-      'images/ot4.png',
-      'images/ot5.png',
-      'images/ot6.png'
-    ];
-
-    const reviewsRow = document.getElementById('reviewsRow');
-    const reviewsPrev = document.getElementById('reviewsPrev');
-    const reviewsNext = document.getElementById('reviewsNext');
-    let reviewIndex = 0;
-
-    function renderReviews() {
-      if (!reviewsRow) return;
-      reviewsRow.innerHTML = '';
-      for (let i = 0; i < 3; i++) {
-        const imgIndex = (reviewIndex + i) % reviewImages.length;
-        const card = document.createElement('article');
-        card.className = 'review-photo';
-        card.innerHTML = '<img src="' + reviewImages[imgIndex] + '" alt="Отзыв ' + (imgIndex + 1) + '">';
-        reviewsRow.appendChild(card);
-      }
-    }
-
-    if (reviewsPrev && reviewsNext) {
-      reviewsPrev.addEventListener('click', () => {
-        reviewIndex = (reviewIndex - 1 + reviewImages.length) % reviewImages.length;
-        renderReviews();
-      });
-
-      reviewsNext.addEventListener('click', () => {
-        reviewIndex = (reviewIndex + 1) % reviewImages.length;
-        renderReviews();
-      });
-    }
-
     showStep(0);
     setCatalogFilter('interior');
-    renderReviews();
   </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
