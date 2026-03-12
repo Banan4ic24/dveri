@@ -536,17 +536,27 @@
       gap:16px;
       align-items:start;
     }
-    .review-photo{
-      background:#fff;
+    .review-card{
+      background:#eef2ff;
       border-radius:18px;
-      overflow:hidden;
+      padding:18px;
+      min-height:220px;
       box-shadow:var(--shadow);
-      border:1px solid var(--line);
     }
-    .review-photo img{
-      aspect-ratio:4/5;
-      object-fit:contain;
-      background:#fff;
+    .review-card h4{
+      margin:0 0 8px;
+      font-size:16px;
+    }
+    .stars{
+      color:#f3b51d;
+      font-size:16px;
+      margin-bottom:10px;
+    }
+    .review-card p{
+      margin:0;
+      color:#333;
+      font-size:14px;
+      line-height:1.45;
     }
     .reviews-arrows{
       display:flex;
@@ -1416,7 +1426,32 @@
       callbackSuccess.classList.remove('hidden');
     });
 
- 
+    const reviewsData = [
+      {
+        name: 'Елена',
+        text: 'Подобрали двери под интерьер, всё объяснили спокойно и без навязывания. В итоге взяли вариант, который реально подошёл по бюджету.'
+      },
+      {
+        name: 'Анастасия',
+        text: 'Понравился выбор и то, что менеджер быстро сориентировал по моделям. Фото и живой вариант совпали, остались довольны.'
+      },
+      {
+        name: 'Виктория',
+        text: 'Хороший магазин, всё понятно по срокам и стоимости. Помогли выбрать входную дверь и подсказали по комплектации.'
+      },
+      {
+        name: 'Роман',
+        text: 'Заказывали двери в квартиру. Всё пришло аккуратно, без лишней суеты, менеджер всегда был на связи. Магазин понравился.'
+      },
+      {
+        name: 'Марина',
+        text: 'Очень удобно, что можно сразу посмотреть каталог и быстро оставить заявку. Выбрали межкомнатные двери, качеством довольны.'
+      },
+      {
+        name: 'Ольга',
+        text: 'Понравилось отношение и то, что не пытались продать самое дорогое. Подобрали хороший вариант под наш бюджет и интерьер.'
+      }
+    ];
 
     const reviewsRow = document.getElementById('reviewsRow');
     const reviewsPrev = document.getElementById('reviewsPrev');
@@ -1426,23 +1461,28 @@
     function renderReviews() {
       if (!reviewsRow) return;
       reviewsRow.innerHTML = '';
+
       for (let i = 0; i < 3; i++) {
-        const imgIndex = (reviewIndex + i) % reviewImages.length;
+        const current = reviewsData[(reviewIndex + i) % reviewsData.length];
         const card = document.createElement('article');
-        card.className = 'review-photo';
-        card.innerHTML = '<img src="' + reviewImages[imgIndex] + '" alt="Отзыв ' + (imgIndex + 1) + '">';
+        card.className = 'review-card';
+        card.innerHTML = `
+          <h4>${current.name}</h4>
+          <div class="stars">★★★★★</div>
+          <p>${current.text}</p>
+        `;
         reviewsRow.appendChild(card);
       }
     }
 
     if (reviewsPrev && reviewsNext) {
       reviewsPrev.addEventListener('click', () => {
-        reviewIndex = (reviewIndex - 1 + reviewImages.length) % reviewImages.length;
+        reviewIndex = (reviewIndex - 1 + reviewsData.length) % reviewsData.length;
         renderReviews();
       });
 
       reviewsNext.addEventListener('click', () => {
-        reviewIndex = (reviewIndex + 1) % reviewImages.length;
+        reviewIndex = (reviewIndex + 1) % reviewsData.length;
         renderReviews();
       });
     }
@@ -1453,6 +1493,3 @@
   </script>
 </body>
 </html>
-
-
-
