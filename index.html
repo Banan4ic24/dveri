@@ -325,19 +325,24 @@
     }
 
     .cta-band{
-      background:#fff;
-      border-top:1px solid var(--line);
-      border-bottom:1px solid var(--line);
-      padding:22px 0;
+      background:linear-gradient(90deg,#ff5a18,#ff3131,#d31313);
+      padding:28px 0;
+      box-shadow:0 12px 30px rgba(227,44,44,.18);
     }
     .cta-band-inner{
       display:flex;
       align-items:center;
       justify-content:center;
-      gap:18px;
+      gap:20px;
       flex-wrap:wrap;
       font-size:18px;
-      font-weight:800;
+      font-weight:900;
+      color:#fff;
+    }
+    .cta-band .btn-primary{
+      background:#fff;
+      color:#c91818;
+      box-shadow:none;
     }
 
     .quiz-wrap{max-width:760px;margin:0 auto}
@@ -575,6 +580,28 @@
       cursor:pointer;
     }
 
+    .salon-layout{
+      display:grid;
+      grid-template-columns:minmax(280px,.42fr) minmax(0,1fr);
+      gap:24px;
+      align-items:center;
+    }
+    .salon-copy h2{
+      margin:0 0 16px;
+      font-size:clamp(30px, 3vw, 54px);
+      line-height:1.05;
+      font-weight:900;
+    }
+    .salon-copy p{
+      margin:0 0 14px;
+      font-size:17px;
+      line-height:1.45;
+      color:#444;
+    }
+    .salon-copy .btn{
+      margin-top:10px;
+    }
+
     .salon-card,
     .map-card{
       background:#fff;
@@ -681,10 +708,14 @@
     @media (max-width: 1180px){
       .topbar-inner{grid-template-columns:1fr 1fr}
       .hero-grid,
-      .map-grid{grid-template-columns:1fr}
+      .map-grid,
+      .salon-layout{grid-template-columns:1fr}
       .catalog-grid{grid-template-columns:repeat(4, minmax(0,1fr))}
       .installed-grid{grid-template-columns:repeat(4, minmax(0,1fr))}
       .reviews-row{grid-template-columns:repeat(3, minmax(0,1fr))}
+      .salon-copy{
+        text-align:center;
+      }
     }
 
     @media (max-width: 760px){
@@ -1171,35 +1202,35 @@
     </div>
   </section>
 
-   <section class="section" id="salon">
+  <section class="section" id="salon">
     <div class="container">
-      <h2 class="section-title">Посмотрите двери в нашем магазине</h2>
-
-      <div class="salon-card">
-        <div class="salon-main">
-          <button class="slider-arrow left" type="button" id="salonPrev">‹</button>
-          <img id="salonMainImage" src="images/IMG_5119.jpg" alt="Салон дверей">
-          <button class="slider-arrow right" type="button" id="salonNext">›</button>
+      <div class="salon-layout">
+        <div class="salon-copy">
+          <h2>Посмотрите двери в нашем магазине</h2>
+          <p>В салоне можно вживую посмотреть модели, цвета, покрытия и подобрать двери под интерьер квартиры или дома.</p>
+          <p>Покажем популярные варианты, подскажем по комплектации и сразу сориентируем по стоимости.</p>
+          <button class="btn btn-primary" data-scroll="#quiz">Узнать стоимость</button>
         </div>
 
-        <div class="salon-thumbs" id="salonThumbs">
-          <img src="images/IMG_5119.jpg" class="active" alt="salon1">
-          <img src="images/IMG_5121.jpg" alt="salon2">
-          <img src="images/IMG_5122.jpg" alt="salon3">
-          <img src="images/IMG_5124.jpg" alt="salon4">
-          <img src="images/IMG_5126.jpg" alt="salon5">
-          <img src="images/IMG_5127.jpg" alt="salon6">
-          <img src="images/IMG_5128.jpg" alt="salon7">
-          <img src="images/IMG_5137.jpg" alt="salon8">
-          <img src="images/IMG_5138.jpg" alt="salon9">
+        <div class="salon-card">
+          <div class="salon-main">
+            <button class="slider-arrow left" type="button" id="salonPrev">‹</button>
+            <img id="salonMainImage" src="images/salon1.jpg" alt="Салон дверей">
+            <button class="slider-arrow right" type="button" id="salonNext">›</button>
+          </div>
+
+          <div class="salon-thumbs" id="salonThumbs">
+            <img src="images/salon1.jpg" class="active" alt="salon1">
+            <img src="images/salon2.jpg" alt="salon2">
+            <img src="images/salon3.jpg" alt="salon3">
+            <img src="images/salon4.jpg" alt="salon4">
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-
-
-<section class="section alt" id="address">
+  <section class="section alt" id="address">
     <div class="container">
       <h2 class="section-title">Адрес нашего магазина дверей в Тольятти</h2>
 
@@ -1216,11 +1247,10 @@
           </div>
 
           <div class="salon-thumbs" id="shopThumbs">
-            <img src="images/magaz3.jpg" class="active" alt="shop1">
-            <img src="images/magaz2.jpg" alt="shop2">
-            <img src="images/magaz1.jpg" alt="shop3">
-            <img src="images/magaz4.jpg" alt="shop4">
-            <img src="images/magaz5.jpg" alt="shop5">
+            <img src="images/salon1.jpg" class="active" alt="shop1">
+            <img src="images/salon2.jpg" alt="shop2">
+            <img src="images/salon3.jpg" alt="shop3">
+            <img src="images/salon4.jpg" alt="shop4">
           </div>
         </div>
       </div>
@@ -1500,4 +1530,3 @@
   </script>
 </body>
 </html>
-
