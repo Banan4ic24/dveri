@@ -722,7 +722,7 @@
     }
   </style>
 </head>
-<body>
+<body id="top">
   <header class="topbar">
     <div class="container topbar-inner">
       <div class="brand">
@@ -756,7 +756,7 @@
         <p class="hero-sub">Подберём подходящие модели, покажем каталог и рассчитаем комплект под ваш запрос.</p>
 
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#quiz">Пройти тест и узнать стоимость</a>
+          <a class="btn btn-primary" href="#" data-scroll="#top">Пройти тест и узнать стоимость</a>
           <button class="btn btn-outline-light" data-open-modal>Заказать обратный звонок</button>
         </div>
 
@@ -907,7 +907,7 @@
           </div>
         </article>
 
-             <article class="door-card" data-type="interior">
+        <article class="door-card" data-type="interior">
           <img src="images/Л7 Белый Софт.png" alt="Л7 Белый Софт">
           <div class="door-card-body">
             <h3>Л7 Белый Софт</h3>
@@ -915,7 +915,7 @@
           </div>
         </article>
         
-     <article class="door-card" data-type="interior">
+        <article class="door-card" data-type="interior">
           <img src="images/Л7 Мокко.jpg" alt="Л7 Моккоа">
           <div class="door-card-body">
             <h3>Л7 Мокко</h3>
@@ -946,16 +946,14 @@
             <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
-    
 
-             <article class="door-card" data-type="interior">
+        <article class="door-card" data-type="interior">
           <img src="images/ЛДГ Белая Лиственница.jpeg" alt="ЛДГ Бел Лист">
           <div class="door-card-body">
             <h3>ЛДГ Бел Лист</h3>
             <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
-
 
         <article class="door-card" data-type="interior">
           <img src="images/Лира ДО-2.png" alt="Лира ДО-2">
@@ -965,7 +963,6 @@
           </div>
         </article>
 
-
         <article class="door-card" data-type="interior">
           <img src="images/Флоренция.webp" alt="Флоренция">
           <div class="door-card-body">
@@ -973,7 +970,6 @@
             <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
-
 
         <article class="door-card" data-type="interior">
           <img src="images/Л1 Белый Софт.png" alt="Л1 Белый Софт">
@@ -991,9 +987,8 @@
           </div>
         </article>
 
-
         <article class="door-card" data-type="interior">
-          <img src="images/2с1м беленный дуб БС.jpg" alt="<2С1М Беленый дуб">
+          <img src="images/2с1м беленный дуб БС.jpg" alt="2С1М Беленый дуб">
           <div class="door-card-body">
             <h3>2С1М Беленый дуб</h3>
             <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
@@ -1031,7 +1026,6 @@
             <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
-        
       </div>
     </div>
   </section>
@@ -1184,20 +1178,15 @@
       <div class="salon-card">
         <div class="salon-main">
           <button class="slider-arrow left" type="button" id="salonPrev">‹</button>
-          <img id="salonMainImage" src="images/IMG_5119.jpg" alt="Салон дверей">
+          <img id="salonMainImage" src="images/salon1.jpg" alt="Салон дверей">
           <button class="slider-arrow right" type="button" id="salonNext">›</button>
         </div>
 
         <div class="salon-thumbs" id="salonThumbs">
-          <img src="images/IMG_5119.jpg" class="active" alt="salon1">
-          <img src="images/IMG_5121.jpg" alt="salon2">
-          <img src="images/IMG_5122.jpg" alt="salon3">
-          <img src="images/IMG_5124.jpg" alt="salon4">
-          <img src="images/IMG_5126.jpg" alt="salon5">
-          <img src="images/IMG_5127.jpg" alt="salon6">
-          <img src="images/IMG_5128.jpg" alt="salon7">
-          <img src="images/IMG_5137.jpg" alt="salon8">
-          <img src="images/IMG_5138.jpg" alt="salon9">
+          <img src="images/salon1.jpg" class="active" alt="salon1">
+          <img src="images/salon2.jpg" alt="salon2">
+          <img src="images/salon3.jpg" alt="salon3">
+          <img src="images/salon4.jpg" alt="salon4">
         </div>
       </div>
     </div>
@@ -1220,11 +1209,10 @@
           </div>
 
           <div class="salon-thumbs" id="shopThumbs">
-            <img src="images/magaz3.jpg" class="active" alt="shop1">
-            <img src="images/magaz2.jpg" alt="shop2">
-            <img src="images/magaz1.jpg" alt="shop3">
-            <img src="images/magaz4.jpg" alt="shop4">
-            <img src="images/magaz5.jpg" alt="shop5">
+            <img src="images/salon1.jpg" class="active" alt="shop1">
+            <img src="images/salon2.jpg" alt="shop2">
+            <img src="images/salon3.jpg" alt="shop3">
+            <img src="images/salon4.jpg" alt="shop4">
           </div>
         </div>
       </div>
@@ -1315,9 +1303,12 @@
     makeSlider('shopMainImage', 'shopThumbs', 'shopPrev', 'shopNext', 3000);
 
     document.querySelectorAll('[data-scroll]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const target = document.querySelector(btn.dataset.scroll);
-        if (target) target.scrollIntoView({ behavior:'smooth', block:'start' });
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
       });
     });
 
@@ -1402,6 +1393,7 @@
       e.preventDefault();
       quizForm.classList.add('hidden');
       quizSuccess.classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     const modal = document.getElementById('callbackModal');
@@ -1430,6 +1422,7 @@
       e.preventDefault();
       callbackForm.classList.add('hidden');
       callbackSuccess.classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     const reviewsData = [
@@ -1499,6 +1492,3 @@
   </script>
 </body>
 </html>
-
-
-
