@@ -300,14 +300,32 @@
       padding:0;
     }
     .door-card-body{
-      padding:8px 4px 0;
+      padding:10px 4px 0;
     }
-    .door-card-body h3{
-      margin:0 0 10px;
+    .door-desc{
+      display:block;
+      font-size:15px;
+      line-height:1.3;
+      color:#444;
+      min-height:40px;
+      margin-bottom:6px;
+    }
+    .door-price{
+      display:block;
+      font-size:22px;
+      line-height:1.1;
+      font-weight:900;
+      color:#222;
+      margin-bottom:12px;
+    }
+    .door-name-entry{
+      display:block;
       font-size:18px;
       line-height:1.2;
       font-weight:800;
       color:#333;
+      margin-bottom:12px;
+      min-height:42px;
     }
     .catalog-red-btn{
       display:inline-flex;
@@ -512,7 +530,7 @@
       padding:16px;
       text-align:center;
       font-size:16px;
-      line-height:1.4;
+      line-height:1.5;
     }
 
     .installed-grid{
@@ -545,8 +563,10 @@
       background:#eef2ff;
       border-radius:18px;
       padding:18px;
-      min-height:220px;
+      min-height:260px;
       box-shadow:var(--shadow);
+      display:flex;
+      flex-direction:column;
     }
     .review-card h4{
       margin:0 0 8px;
@@ -558,10 +578,29 @@
       margin-bottom:10px;
     }
     .review-card p{
-      margin:0;
+      margin:0 0 16px;
       color:#333;
       font-size:14px;
       line-height:1.45;
+      flex:1;
+    }
+    .review-links{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .review-link{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:38px;
+      padding:8px 14px;
+      border-radius:999px;
+      border:1px solid var(--red);
+      color:var(--red);
+      font-size:13px;
+      font-weight:800;
+      background:#fff;
     }
     .reviews-arrows{
       display:flex;
@@ -582,7 +621,7 @@
 
     .salon-layout{
       display:grid;
-      grid-template-columns:minmax(280px,.42fr) minmax(0,1fr);
+      grid-template-columns:minmax(320px,.42fr) minmax(0,1fr);
       gap:24px;
       align-items:center;
     }
@@ -598,8 +637,11 @@
       line-height:1.45;
       color:#444;
     }
-    .salon-copy .btn{
-      margin-top:10px;
+    .salon-copy-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:18px;
     }
 
     .salon-card,
@@ -713,9 +755,8 @@
       .catalog-grid{grid-template-columns:repeat(4, minmax(0,1fr))}
       .installed-grid{grid-template-columns:repeat(4, minmax(0,1fr))}
       .reviews-row{grid-template-columns:repeat(3, minmax(0,1fr))}
-      .salon-copy{
-        text-align:center;
-      }
+      .salon-copy{text-align:center}
+      .salon-copy-actions{justify-content:center}
     }
 
     @media (max-width: 760px){
@@ -750,6 +791,9 @@
       .installed-grid{
         grid-template-columns:repeat(2, minmax(0,1fr));
       }
+      .salon-copy-actions{
+        flex-direction:column;
+      }
     }
   </style>
 </head>
@@ -758,7 +802,7 @@
     <div class="container topbar-inner">
       <div class="brand">
         <img class="brand-logo" src="images/logo.png" alt="Наши Двери">
-        <div class="brand-copy">Межкомнатные и входные двери<br>от производителя в Тольятти</div>
+        <div class="brand-copy">Входные и межкомнатные двери с установкой в Тольятти по цене от производителя</div>
       </div>
 
       <div class="top-note">
@@ -783,12 +827,12 @@
   <section class="hero">
     <div class="container hero-grid">
       <div class="hero-content">
-        <h1>Межкомнатные и входные двери с установкой в Тольятти по цене от производителя. Пройдите тест и узнайте стоимость за 1 минуту</h1>
+        <h1>Входные и межкомнатные двери с установкой в Тольятти по цене от производителя</h1>
         <p class="hero-sub">Подберём подходящие модели, покажем каталог и рассчитаем комплект под ваш запрос.</p>
 
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#" data-scroll="#top">Пройти тест и узнать стоимость</a>
-          <button class="btn btn-outline-light" data-open-modal>Заказать обратный звонок</button>
+          <a class="btn btn-primary" href="#quiz" data-scroll="#quiz">Рассчитать стоимость дверей за 1 минуту →</a>
+          <button class="btn btn-outline-light" data-open-modal>Бесплатно вызвать замерщика</button>
         </div>
 
         <div class="feature-list">
@@ -804,7 +848,7 @@
             <span class="feature-icon">✓</span>
             <span>
               <strong>Самые быстрые сроки изготовления</strong>
-              Работаем на прямую от производств. Без посредников
+              Работаем напрямую от производств. Без посредников
             </span>
           </div>
 
@@ -812,7 +856,7 @@
             <span class="feature-icon">✓</span>
             <span>
               <strong>Установка за 1 день</strong>
-              Монтажнкии делают идеально - больше никаких перекосов и переделок
+              Монтаж выполняем быстро, аккуратно и без лишних переделок
             </span>
           </div>
 
@@ -861,151 +905,161 @@
         <article class="door-card" data-type="entry">
           <img src="images/Арабика.webp" alt="Арабика">
           <div class="door-card-body">
-            <h3>Арабика</h3>
-            <button class="catalog-red-btn" data-scroll="#quiz">Узнать цену</button>
+            <span class="door-name-entry">Арабика</span>
+            <button class="catalog-red-btn" data-scroll="#quiz">Получить консультацию</button>
           </div>
         </article>
 
         <article class="door-card" data-type="entry">
           <img src="images/Бора.webp" alt="Бора">
           <div class="door-card-body">
-            <h3>Бора</h3>
-            <button class="catalog-red-btn" data-scroll="#quiz">Узнать цену</button>
+            <span class="door-name-entry">Бора</span>
+            <button class="catalog-red-btn" data-scroll="#quiz">Получить консультацию</button>
           </div>
         </article>
 
         <article class="door-card" data-type="entry">
           <img src="images/Термо Чикаго-2 (Штамп).png" alt="Термо Чикаго-2">
           <div class="door-card-body">
-            <h3>Термо Чикаго-2</h3>
-            <button class="catalog-red-btn" data-scroll="#quiz">Узнать цену</button>
+            <span class="door-name-entry">Термо Чикаго-2</span>
+            <button class="catalog-red-btn" data-scroll="#quiz">Получить консультацию</button>
           </div>
         </article>
 
         <article class="door-card" data-type="entry">
           <img src="images/Термо Чикаго 1 Окно.jpg" alt="Термо Чикаго 1 Окно">
           <div class="door-card-body">
-            <h3>Термо Чикаго 1 Окно</h3>
-            <button class="catalog-red-btn" data-scroll="#quiz">Узнать цену</button>
+            <span class="door-name-entry">Термо Чикаго 1 Окно</span>
+            <button class="catalog-red-btn" data-scroll="#quiz">Получить консультацию</button>
           </div>
         </article>
 
         <article class="door-card" data-type="entry">
           <img src="images/Дельта 2МДФ НЕО10.webp" alt="Дельта 2МДФ">
           <div class="door-card-body">
-            <h3>Дельта 2МДФ</h3>
-            <button class="catalog-red-btn" data-scroll="#quiz">Узнать цену</button>
+            <span class="door-name-entry">Дельта 2МДФ</span>
+            <button class="catalog-red-btn" data-scroll="#quiz">Получить консультацию</button>
           </div>
         </article>
 
         <article class="door-card" data-type="entry">
           <img src="images/Гамма 2 МДФ НЕО10 белая.jpg" alt="Гамма 2 МДФ">
           <div class="door-card-body">
-            <h3>Гамма 2 МДФ</h3>
-            <button class="catalog-red-btn" data-scroll="#quiz">Узнать цену</button>
+            <span class="door-name-entry">Гамма 2 МДФ</span>
+            <button class="catalog-red-btn" data-scroll="#quiz">Получить консультацию</button>
           </div>
         </article>
 
         <article class="door-card" data-type="entry">
           <img src="images/Корсика Зеркало.png" alt="Корсика Зеркало">
           <div class="door-card-body">
-            <h3>Корсика Зеркало</h3>
-            <button class="catalog-red-btn" data-scroll="#quiz">Узнать цену</button>
+            <span class="door-name-entry">Корсика Зеркало</span>
+            <button class="catalog-red-btn" data-scroll="#quiz">Получить консультацию</button>
           </div>
         </article>
 
         <article class="door-card" data-type="entry">
           <img src="images/Корсика.jpeg" alt="Корсика">
           <div class="door-card-body">
-            <h3>Корсика</h3>
-            <button class="catalog-red-btn" data-scroll="#quiz">Узнать цену</button>
+            <span class="door-name-entry">Корсика</span>
+            <button class="catalog-red-btn" data-scroll="#quiz">Получить консультацию</button>
           </div>
         </article>
 
         <article class="door-card" data-type="entry">
           <img src="images/Лига 70.jpeg" alt="Лига 70">
           <div class="door-card-body">
-            <h3>Лига 70</h3>
-            <button class="catalog-red-btn" data-scroll="#quiz">Узнать цену</button>
+            <span class="door-name-entry">Лига 70</span>
+            <button class="catalog-red-btn" data-scroll="#quiz">Получить консультацию</button>
           </div>
         </article>
 
         <article class="door-card" data-type="interior">
-          <img src="images/Л2 Серая текстура.png" alt="Л2 Серая текстура">
+          <img src="images/Л2 Серая текстура.png" alt="Серые двери с текстурой">
           <div class="door-card-body">
-            <h3>Л2 Серая текстура</h3>
+            <span class="door-desc">Серые двери с текстурой</span>
+            <strong class="door-price">от 9550р</strong>
             <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
 
         <article class="door-card" data-type="interior">
-          <img src="images/Л7 Белый Софт.png" alt="Л7 Белый Софт">
+          <img src="images/Л7 Белый Софт.png" alt="Белые двери софт">
           <div class="door-card-body">
-            <h3>Л7 Белый Софт</h3>
+            <span class="door-desc">Белые двери софт</span>
+            <strong class="door-price">от 9600р</strong>
             <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
         
         <article class="door-card" data-type="interior">
-          <img src="images/Л7 Мокко.jpg" alt="Л7 Моккоа">
+          <img src="images/Л7 Мокко.jpg" alt="Двери с кофейным оттенком">
           <div class="door-card-body">
-            <h3>Л7 Мокко</h3>
+            <span class="door-desc">Двери с кофейным оттенком</span>
+            <strong class="door-price">от 9600р</strong>
             <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
 
         <article class="door-card" data-type="interior">
-          <img src="images/ЛДГ Бетон Светлый.jpeg" alt="ЛДГ Бетон Светлый">
+          <img src="images/ЛДГ Бетон Светлый.jpeg" alt="Двери в стиле Лофт (бетон светлый)">
           <div class="door-card-body">
-            <h3>ЛДГ Бетон Светлый</h3>
+            <span class="door-desc">Двери в стиле Лофт (бетон светлый)</span>
+            <strong class="door-price">от 3900р</strong>
             <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
 
         <article class="door-card" data-type="interior">
-          <img src="images/ЛДГ Бетон Темный.jpeg" alt="ЛДГ Бетон Темный">
+          <img src="images/ЛДГ Бетон Темный.jpeg" alt="Двери в стиле Лофт (бетон темный)">
           <div class="door-card-body">
-            <h3>ЛДГ Бетон Темный</h3>
+            <span class="door-desc">Двери в стиле Лофт (бетон темный)</span>
+            <strong class="door-price">от 3900р</strong>
             <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
 
         <article class="door-card" data-type="interior">
-          <img src="images/ЛИРА ДГ.png" alt="ЛИРА ДГ">
+          <img src="images/ЛИРА ДГ.png" alt="Белые классические двери">
           <div class="door-card-body">
-            <h3>ЛИРА ДГ</h3>
+            <span class="door-desc">Белые классические двери</span>
+            <strong class="door-price">от 9000р</strong>
             <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
 
         <article class="door-card" data-type="interior">
-          <img src="images/ЛДГ Белая Лиственница.jpeg" alt="ЛДГ Бел Лист">
+          <img src="images/ЛДГ Белая Лиственница.jpeg" alt="Двери недорогие (белая лиственница)">
           <div class="door-card-body">
-            <h3>ЛДГ Бел Лист</h3>
+            <span class="door-desc">Двери недорогие (белая лиственница)</span>
+            <strong class="door-price">от 3900р</strong>
             <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
 
         <article class="door-card" data-type="interior">
-          <img src="images/Лира ДО-2.png" alt="Лира ДО-2">
+          <img src="images/Лира ДО-2.png" alt="Двери на кухню (белая классика со стеклом)">
           <div class="door-card-body">
-            <h3>Лира ДО-2</h3>
+            <span class="door-desc">Двери на кухню (белая классика со стеклом)</span>
+            <strong class="door-price">от 9000р</strong>
             <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
 
         <article class="door-card" data-type="interior">
-          <img src="images/Флоренция.webp" alt="Флоренция">
+          <img src="images/Флоренция.webp" alt="Двери в стиле Модерн (белые)">
           <div class="door-card-body">
-            <h3>Флоренция</h3>
+            <span class="door-desc">Двери в стиле Модерн (белые)</span>
+            <strong class="door-price">от 10200р</strong>
             <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
 
         <article class="door-card" data-type="interior">
-          <img src="images/Л1 Белый Софт.png" alt="Л1 Белый Софт">
+          <img src="images/Л1 Белый Софт.png" alt="Двери в стиле Минимализм (белый софт)">
           <div class="door-card-body">
-            <h3>Л1 Белый Софт</h3>
+            <span class="door-desc">Двери в стиле Минимализм (белый софт)</span>
+            <strong class="door-price">от 9150р</strong>
             <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
@@ -1013,47 +1067,52 @@
         <article class="door-card" data-type="entry">
           <img src="images/Термо Белый Матовый.webp" alt="Термо Белый Матовый">
           <div class="door-card-body">
-            <h3>Термо Белый Матовый</h3>
-            <button class="catalog-red-btn" data-scroll="#quiz">Узнать цену</button>
+            <span class="door-name-entry">Термо Белый Матовый</span>
+            <button class="catalog-red-btn" data-scroll="#quiz">Получить консультацию</button>
           </div>
         </article>
 
         <article class="door-card" data-type="interior">
-          <img src="images/2с1м беленный дуб БС.jpg" alt="2С1М Беленый дуб">
+          <img src="images/2с1м беленный дуб БС.jpg" alt="Двери в стиле Хай-Тек (беленый дуб)">
           <div class="door-card-body">
-            <h3>2С1М Беленый дуб</h3>
+            <span class="door-desc">Двери в стиле Хай-Тек (беленый дуб)</span>
+            <strong class="door-price">от 3900р</strong>
             <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
 
         <article class="door-card" data-type="interior">
-          <img src="images/3с2с эшвайтЧС цмик.jpg" alt="3С2С Эшвайт">
+          <img src="images/3с2с эшвайтЧС цмик.jpg" alt="Двери светлые (эшвайт)">
           <div class="door-card-body">
-            <h3>3С2С Эшвайт</h3>
+            <span class="door-desc">Двери светлые (эшвайт)</span>
+            <strong class="door-price">от 4450р</strong>
             <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
 
         <article class="door-card" data-type="interior">
-          <img src="images/5С БС бел дуб.jpg" alt="5С БС бел дуб">
+          <img src="images/5С БС бел дуб.jpg" alt="Двери в гостиную эконом (беленый дуб)">
           <div class="door-card-body">
-            <h3>5С Беленый дуб</h3>
+            <span class="door-desc">Двери в гостиную эконом (беленый дуб)</span>
+            <strong class="door-price">от 4100р</strong>
             <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
 
         <article class="door-card" data-type="interior">
-          <img src="images/5с кап ЧС.jpg" alt="5С Грей">
+          <img src="images/5с кап ЧС.jpg" alt="Двери серые эконом (грей)">
           <div class="door-card-body">
-            <h3>5С Грей</h3>
+            <span class="door-desc">Двери серые эконом (грей)</span>
+            <strong class="door-price">от 4100р</strong>
             <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
 
         <article class="door-card" data-type="interior">
-          <img src="images/7с белдуб.PNG" alt="7С Беленый дуб">
+          <img src="images/7с белдуб.PNG" alt="Двери в санузел (беленый дуб)">
           <div class="door-card-body">
-            <h3>7С Беленый дуб</h3>
+            <span class="door-desc">Двери в санузел (беленый дуб)</span>
+            <strong class="door-price">от 4100р</strong>
             <button class="catalog-red-btn" data-scroll="#quiz">Рассчитать комплект</button>
           </div>
         </article>
@@ -1078,14 +1137,14 @@
           <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
 
           <div class="quiz-step active" data-step="0">
-            <div class="quiz-title">Какие двери вас интересуют?</div>
+            <div class="quiz-title">Какие двери подбираем?</div>
             <div class="select-cards">
               <div class="select-card" data-name="doorType" data-value="Межкомнатные">
-                <img src="images/ЛИРА ДГ.jpg" alt="Межкомнатные">
+                <img src="https://drive.google.com/uc?export=view&id=1wjEFmPgxhnVgqSFPU3NG-TsrV0vVsd8b" alt="Межкомнатные">
                 <div>Межкомнатные</div>
               </div>
               <div class="select-card" data-name="doorType" data-value="Входные">
-                <img src="images/D1 Эшвайт.png" alt="Входные">
+                <img src="https://xn--24-mlcaoysjdt.xn--p1ai/upload/resize_cache/iblock/dec/648_460_2/dec0bb39c08523b6c43065d0f2705b53.jpg" alt="Входные">
                 <div>Входные</div>
               </div>
             </div>
@@ -1095,11 +1154,14 @@
           </div>
 
           <div class="quiz-step" data-step="1">
-            <div class="quiz-title">Какой сегмент вас интересует?</div>
+            <div class="quiz-title">Сколько дверей вам нужно?</div>
             <div class="option-grid">
-              <label class="option" data-name="segment" data-value="Эконом"><span class="radio"></span><span>Эконом</span></label>
-              <label class="option" data-name="segment" data-value="Стандарт"><span class="radio"></span><span>Стандарт</span></label>
-              <label class="option" data-name="segment" data-value="Премиум"><span class="radio"></span><span>Премиум</span></label>
+              <label class="option" data-name="count" data-value="1"><span class="radio"></span><span>1</span></label>
+              <label class="option" data-name="count" data-value="2"><span class="radio"></span><span>2</span></label>
+              <label class="option" data-name="count" data-value="3"><span class="radio"></span><span>3</span></label>
+              <label class="option" data-name="count" data-value="4"><span class="radio"></span><span>4</span></label>
+              <label class="option" data-name="count" data-value="5"><span class="radio"></span><span>5</span></label>
+              <label class="option" data-name="count" data-value="6 и более"><span class="radio"></span><span>6 и более</span></label>
             </div>
             <div class="quiz-nav one-btn">
               <button class="back-btn" type="button" data-prev>←</button>
@@ -1107,12 +1169,11 @@
           </div>
 
           <div class="quiz-step" data-step="2">
-            <div class="quiz-title">Сколько дверей вам нужно?</div>
+            <div class="quiz-title">Когда планируете установку?</div>
             <div class="option-grid">
-              <label class="option" data-name="count" data-value="1"><span class="radio"></span><span>1 шт</span></label>
-              <label class="option" data-name="count" data-value="2"><span class="radio"></span><span>2 шт</span></label>
-              <label class="option" data-name="count" data-value="3"><span class="radio"></span><span>3 шт</span></label>
-              <label class="option" data-name="count" data-value="4+"><span class="radio"></span><span>Более 4 шт</span></label>
+              <label class="option" data-name="timing" data-value="В ближайшее время"><span class="radio"></span><span>В ближайшее время</span></label>
+              <label class="option" data-name="timing" data-value="В течение 1-2 месяцев"><span class="radio"></span><span>В течение 1-2 месяцев</span></label>
+              <label class="option" data-name="timing" data-value="Срок не определен, нужна информация"><span class="radio"></span><span>Срок не определен, нужна информация</span></label>
             </div>
             <div class="quiz-nav one-btn">
               <button class="back-btn" type="button" data-prev>←</button>
@@ -1120,23 +1181,19 @@
           </div>
 
           <div class="quiz-step" data-step="3">
-            <div class="quiz-title">Когда планируете ставить двери?</div>
-            <div class="option-grid">
-              <label class="option" data-name="timing" data-value="В ближайшее время"><span class="radio"></span><span>В ближайшее время</span></label>
-              <label class="option" data-name="timing" data-value="В течение месяца"><span class="radio"></span><span>В течение месяца</span></label>
-              <label class="option" data-name="timing" data-value="Позже"><span class="radio"></span><span>Через несколько месяцев</span></label>
-            </div>
+            <div class="quiz-title" id="budgetTitle">Какой бюджет?</div>
+            <div class="option-grid" id="budgetOptions"></div>
             <div class="quiz-nav one-btn">
               <button class="back-btn" type="button" data-prev>←</button>
             </div>
           </div>
 
           <div class="quiz-step" data-step="4">
-            <div class="quiz-title">Как с вами удобнее связаться?</div>
+            <div class="quiz-title">Куда направить каталог и предварительный расчет?</div>
             <div class="option-grid">
-              <label class="option" data-name="contactWay" data-value="WhatsApp"><span class="radio"></span><span>WhatsApp</span></label>
-              <label class="option" data-name="contactWay" data-value="Telegram"><span class="radio"></span><span>Telegram</span></label>
-              <label class="option" data-name="contactWay" data-value="По телефону"><span class="radio"></span><span>На мобильный</span></label>
+              <label class="option" data-name="contactWay" data-value="Telegram"><span class="radio"></span><span>Телеграм</span></label>
+              <label class="option" data-name="contactWay" data-value="MAX"><span class="radio"></span><span>МАКС</span></label>
+              <label class="option" data-name="contactWay" data-value="Мобильный"><span class="radio"></span><span>Мобильный</span></label>
             </div>
             <div class="quiz-nav one-btn">
               <button class="back-btn" type="button" data-prev>←</button>
@@ -1159,7 +1216,7 @@
                 <button class="btn btn-primary" type="submit">Получить расчет</button>
               </div>
             </form>
-            <div class="success-box hidden" id="quizSuccess">Спасибо! Заявка отправлена.</div>
+            <div class="success-box hidden" id="quizSuccess"></div>
           </div>
         </div>
       </div>
@@ -1206,10 +1263,15 @@
     <div class="container">
       <div class="salon-layout">
         <div class="salon-copy">
-          <h2>Посмотрите двери в нашем магазине</h2>
-          <p>В салоне можно вживую посмотреть модели, цвета, покрытия и подобрать двери под интерьер квартиры или дома.</p>
-          <p>Покажем популярные варианты, подскажем по комплектации и сразу сориентируем по стоимости.</p>
-          <button class="btn btn-primary" data-scroll="#quiz">Узнать стоимость</button>
+          <h2>Приходите в наш салон</h2>
+          <p>Вживую посмотреть модели, цвета и покрытия.</p>
+          <p>Подобрать двери под интерьер квартиры или дома.</p>
+          <p>Получить консультацию дизайнера.</p>
+
+          <div class="salon-copy-actions">
+            <a class="btn btn-primary" href="https://yandex.ru/maps/?pt=49.344664,53.541505&z=16&l=map" target="_blank" rel="noopener">Построить маршрут</a>
+            <button class="btn btn-outline" data-open-modal>Записаться на консультацию</button>
+          </div>
         </div>
 
         <div class="salon-card">
@@ -1343,20 +1405,44 @@
     document.querySelectorAll('[data-scroll]').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
+        const target = document.querySelector(btn.dataset.scroll);
+        if (target) {
+          target.scrollIntoView({ behavior:'smooth', block:'start' });
+        }
       });
     });
 
     const quizState = {
       doorType:'',
-      segment:'',
       count:'',
       timing:'',
+      budget:'',
       contactWay:''
     };
+
+    const budgetTitle = document.getElementById('budgetTitle');
+    const budgetOptions = document.getElementById('budgetOptions');
+
+    function renderBudgetStep() {
+      if (quizState.doorType === 'Входные') {
+        budgetTitle.textContent = 'Какой бюджет на дверь?';
+        budgetOptions.innerHTML = `
+          <label class="option" data-name="budget" data-value="до 20000р (технички)"><span class="radio"></span><span>до 20000р (технички)</span></label>
+          <label class="option" data-name="budget" data-value="от 20000-40000р (для квартиры)"><span class="radio"></span><span>от 20000-40000р (для квартиры)</span></label>
+          <label class="option" data-name="budget" data-value="от 40000р (для частных домов)"><span class="radio"></span><span>от 40000р (для частных домов)</span></label>
+        `;
+      } else {
+        budgetTitle.textContent = 'Какой бюджет на один комплект двери (полотно, коробка, наличники)?';
+        budgetOptions.innerHTML = `
+          <label class="option" data-name="budget" data-value="до 8000р (эконом)"><span class="radio"></span><span>до 8000р (эконом)</span></label>
+          <label class="option" data-name="budget" data-value="от 8000-12000р (стандарт)"><span class="radio"></span><span>от 8000-12000р (стандарт)</span></label>
+          <label class="option" data-name="budget" data-value="от 12000-17000р (стандарт +)"><span class="radio"></span><span>от 12000-17000р (стандарт +)</span></label>
+          <label class="option" data-name="budget" data-value="от 17000р (премиум)"><span class="radio"></span><span>от 17000р (премиум)</span></label>
+        `;
+      }
+
+      bindOptionEvents();
+    }
 
     const steps = [...document.querySelectorAll('.quiz-step')];
     const progressBadge = document.getElementById('progressBadge');
@@ -1372,6 +1458,7 @@
 
     function showStep(index) {
       currentStep = index;
+      if (index === 3) renderBudgetStep();
       steps.forEach((step, i) => step.classList.toggle('active', i === index));
       updateProgress();
     }
@@ -1396,19 +1483,26 @@
       btn.addEventListener('click', () => setCatalogFilter(btn.dataset.filter));
     });
 
-    document.querySelectorAll('.option').forEach(option => {
-      option.addEventListener('click', () => {
-        const name = option.dataset.name;
-        quizState[name] = option.dataset.value;
+    function bindOptionEvents() {
+      document.querySelectorAll('.option').forEach(option => {
+        if (option.dataset.bound === 'true') return;
+        option.dataset.bound = 'true';
 
-        document.querySelectorAll('.option[data-name="' + name + '"]').forEach(el => el.classList.remove('selected'));
-        option.classList.add('selected');
+        option.addEventListener('click', () => {
+          const name = option.dataset.name;
+          quizState[name] = option.dataset.value;
 
-        setTimeout(() => {
-          if (currentStep < totalSteps - 1) showStep(currentStep + 1);
-        }, 220);
+          document.querySelectorAll('.option[data-name="' + name + '"]').forEach(el => el.classList.remove('selected'));
+          option.classList.add('selected');
+
+          setTimeout(() => {
+            if (currentStep < totalSteps - 1) showStep(currentStep + 1);
+          }, 220);
+        });
       });
-    });
+    }
+
+    bindOptionEvents();
 
     document.querySelectorAll('.select-card').forEach(card => {
       card.addEventListener('click', () => {
@@ -1418,6 +1512,12 @@
         document.querySelectorAll('.select-card').forEach(el => el.classList.remove('selected'));
         card.classList.add('selected');
 
+        if (value === 'Межкомнатные') {
+          setCatalogFilter('interior');
+        } else {
+          setCatalogFilter('entry');
+        }
+
         setTimeout(() => {
           if (currentStep < totalSteps - 1) showStep(currentStep + 1);
         }, 220);
@@ -1426,12 +1526,14 @@
 
     const quizForm = document.getElementById('quizForm');
     const quizSuccess = document.getElementById('quizSuccess');
+    const quizNameInput = document.getElementById('quizName');
 
     quizForm.addEventListener('submit', (e) => {
       e.preventDefault();
+      const userName = quizNameInput.value.trim() || 'клиент';
       quizForm.classList.add('hidden');
       quizSuccess.classList.remove('hidden');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      quizSuccess.textContent = `Спасибо, ${userName}! Сейчас подберем варианты под ваш бюджет. Посмотрите предварительную подборку ниже и ожидайте звонка специалиста в ближайшее время.`;
     });
 
     const modal = document.getElementById('callbackModal');
@@ -1460,13 +1562,12 @@
       e.preventDefault();
       callbackForm.classList.add('hidden');
       callbackSuccess.classList.remove('hidden');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     const reviewsData = [
       {
         name: 'Виктор',
-        text: 'Купил входные двери в этом магазине в гараж и в дом. Остался доволен не только качеством входной двери, но и сервисом! Устанавливали быстро, мусор убрали, все объяснили - полный комфорт. Спасибо!'
+        text: 'Купил входные двери в этом магазине в гараж и в дом. Остался доволен не только качеством входной двери, но и сервисом! Устанавливали быстро, мусор убрали, все объяснили — полный комфорт. Спасибо!'
       },
       {
         name: 'Александр',
@@ -1482,11 +1583,11 @@
       },
       {
         name: 'Любовь',
-        text: 'Быстро! Качественно! Надежно! Очень ценю высокий уровень сервиса в этом магазине дверей!! Сделала уже ни один ремонт. в Тольятти нет ничего подобного. Качество дверей соответствует презентации Романа, установку провели профессионально и точно в срок. Спасибо Ринату! Рекомендую компанию Наши Двери!'
+        text: 'Быстро! Качественно! Надежно! Очень ценю высокий уровень сервиса в этом магазине дверей. Сделала уже не один ремонт. В Тольятти нет ничего подобного. Рекомендую компанию Наши Двери!'
       },
       {
         name: 'Анастасия',
-        text: 'В Тольятти искала надежные межкомнатные двери и при выборе обратила внимание на качество и отзывы о сервисе. Здесь не подвели. Двери отличные, монтаж качественный, сотрудники внимательные и профессионалы своего дела!'
+        text: 'В Тольятти искала надежные межкомнатные двери и при выборе обратила внимание на качество и отзывы о сервисе. Здесь не подвели. Двери отличные, монтаж качественный, сотрудники внимательные и профессиональные!'
       }
     ];
 
@@ -1494,6 +1595,9 @@
     const reviewsPrev = document.getElementById('reviewsPrev');
     const reviewsNext = document.getElementById('reviewsNext');
     let reviewIndex = 0;
+
+    const yandexReviewLink = 'https://yandex.ru/maps/org/nashi_dveri/51695082831/reviews/?add-review=true&ll=49.342426%2C53.541641&mode=search&sll=49.344486%2C53.541641&sspn=0.015020%2C0.005272&tab=reviews&text=%D0%9D%D0%B0%D1%88%D0%B8%20%D0%94%D0%B2%D0%B5%D1%80%D0%B8&z=17';
+    const gisReviewLink = 'https://2gis.ru/reviews/70000001111528273/addReview?utm_source=lk';
 
     function renderReviews() {
       if (!reviewsRow) return;
@@ -1507,6 +1611,10 @@
           <h4>${current.name}</h4>
           <div class="stars">★★★★★</div>
           <p>${current.text}</p>
+          <div class="review-links">
+            <a class="review-link" href="${yandexReviewLink}" target="_blank" rel="noopener">Читать оригинал — Яндекс</a>
+            <a class="review-link" href="${gisReviewLink}" target="_blank" rel="noopener">Читать оригинал — 2ГИС</a>
+          </div>
         `;
         reviewsRow.appendChild(card);
       }
